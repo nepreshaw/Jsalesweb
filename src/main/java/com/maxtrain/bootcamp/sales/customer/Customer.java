@@ -25,7 +25,7 @@ public class Customer {
 	@Column(columnDefinition="decimal(9,2) NOT NULL DEFAULT 0.0")
 	private double sales;
 	private boolean active;
-
+	
 	
 	
 	public Customer() {}
@@ -54,7 +54,7 @@ public class Customer {
 	public void setSales(double sales) {
 		this.sales = sales;
 	}
-	//changed isActive to getActive to make it consistent with eveyrthing else
+	//changed isActive to getActive to make it consistent with everything else
 	public boolean getActive() {
 		return active;
 	}
