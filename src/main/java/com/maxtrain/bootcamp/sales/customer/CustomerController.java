@@ -28,6 +28,15 @@ public class CustomerController {
 		return new ResponseEntity<Iterable<Customer>>(customers, HttpStatus.OK);
 	}
 	
+	@GetMapping("code/{code}")
+	public ResponseEntity<Customer> getByCode(@PathVariable String code){
+		var cust = custRepo.findByCode(code);
+		if(cust.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+		}
+		return new ResponseEntity<Customer>(cust.get(), HttpStatus.OK);
+	}
+	
 	//ResponseEntity is just like actionresult in c#
 	//
 	@GetMapping("{id}")

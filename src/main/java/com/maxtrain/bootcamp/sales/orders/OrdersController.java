@@ -13,12 +13,17 @@ public class OrdersController {
 	@Autowired
 	private OrdersRepository ordRepo;
 	
+	@GetMapping("reviews")
+	public ResponseEntity<Iterable<Orders>> getOrdersInReview(){
+		var orders = ordRepo.findByStatus("review");
+		return new ResponseEntity<Iterable<Orders>> (orders, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<Iterable<Orders>> getOrders(){
 		var order = ordRepo.findAll();
 		return new ResponseEntity<Iterable<Orders>>(order, HttpStatus.OK);
 	}
-	
 	
 	@GetMapping("{id}")
 	public ResponseEntity<Orders> getOrder(@PathVariable int id){
@@ -63,7 +68,6 @@ public class OrdersController {
 		order.setStatus("rejected");
 		return putOrder(id, order);
 	}
-	
 	
 	@PutMapping("{id}")
 	public ResponseEntity<Orders> putOrder(@PathVariable int id, @RequestBody Orders order){
