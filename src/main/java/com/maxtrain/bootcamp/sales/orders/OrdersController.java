@@ -34,9 +34,36 @@ public class OrdersController {
 		if(order == null || order.getId() != 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		order.setStatus("new");
 		var ord = ordRepo.save(order);
 		return new ResponseEntity<Orders>(ord, HttpStatus.CREATED);
 	}
+	
+	//we get a warning if we don't enter anything in the angle bracket
+	//lets us use response entity without a type
+	@SuppressWarnings("rawtypes")
+	//need to change url because we already have a url with an id in the put method
+	@PutMapping("review/{id}")
+	public ResponseEntity reviewOrder(@PathVariable int id, @RequestBody Orders order) {
+		var statusValue = (order.getTotal() <= 50) ? "approved" : "review";
+		order.setStatus(statusValue);
+		return putOrder(id, order);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@PutMapping("approve/{id}")
+	public ResponseEntity approveOrder(@PathVariable int id, @RequestBody Orders order) {
+		order.setStatus("approved");
+		return putOrder(id, order);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@PutMapping("reject/{id}")
+	public ResponseEntity rejectOrder(@PathVariable int id, @RequestBody Orders order) {
+		order.setStatus("rejected");
+		return putOrder(id, order);
+	}
+	
 	
 	@PutMapping("{id}")
 	public ResponseEntity<Orders> putOrder(@PathVariable int id, @RequestBody Orders order){

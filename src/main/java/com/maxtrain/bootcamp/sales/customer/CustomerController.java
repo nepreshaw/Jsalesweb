@@ -73,8 +73,6 @@ public class CustomerController {
 		custRepo.delete(customer.get());
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	
 }
 
 

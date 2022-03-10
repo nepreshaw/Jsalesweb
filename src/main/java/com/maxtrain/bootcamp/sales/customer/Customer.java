@@ -26,8 +26,6 @@ public class Customer {
 	private double sales;
 	private boolean active;
 	
-	
-	
 	public Customer() {}
 	
 	public int getId() {

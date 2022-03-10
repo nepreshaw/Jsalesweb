@@ -11,6 +11,8 @@ public class Orders {
 	private String description;
 	@Column(columnDefinition="decimal(9,2) NOT NULL DEFAULT 0.0")
 	private double total;
+	@Column(length=30, nullable=false)
+	private String status;
 	
 	//this is creating the foreign key to Customer
 	//saying there are many orders for one customer
@@ -21,6 +23,14 @@ public class Orders {
 	private Customer customer;
 	
 	public Orders() {}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;
